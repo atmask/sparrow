@@ -1,5 +1,6 @@
 # Variables
 DOCKER_IMAGE := sparrow
+DOCKER_TAG := $(shell cat version.txt)
 
 .PHONY: all
 all: venv build build_docker
