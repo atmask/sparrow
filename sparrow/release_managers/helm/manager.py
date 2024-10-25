@@ -65,7 +65,7 @@ class Helm:
             if not self._getChartDependencies(chart_path):
                 raise subprocess.CalledProcessError("Error getting chart dependencies")
 
-            cmd=['helm','upgrade', '-i', release_name, chart_path, '--dry-run', '--namespace', namespace]
+            cmd=['helm','upgrade', '-i', release_name, chart_path, '--namespace', namespace]
             for values_file in values_files:
                 cmd.extend(['-f', f"{chart_path}/{values_file}"])
             
