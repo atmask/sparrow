@@ -1,0 +1,24 @@
+## Configure your clusters
+clusters:
+    - name: dev-cluster
+      provider: azure
+      providerConfig:
+        resourceGroup: dev-cluster-rg
+        clusterName: dev-cluster
+    - name: test-cluster
+      provider: azure
+      providerConfig:
+        resourceGroup: test-cluster-rg
+        clusterName: test-cluster
+
+chartConfigurations:
+  - path: clusters/softwareTeam/ ## This will configure all charts under the path
+    environments: ## Map values files to release environments
+      - name: dev
+        valuesFiles: 
+        - values-dev.yaml
+        cluster: dev-cluster
+      - name: test
+        valuesFiles: 
+        - values-test.yaml
+        cluster: test-cluster
