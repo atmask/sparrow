@@ -11,7 +11,7 @@ Sparrow is a tool for automating Helm Pull Request Management and Deployment via
 A Flask application that listens for Helm Chart pull request events via webhooks.
 
 ### What does it do?
-When an PR is opened to a charts Repo tracked by Sparrow, Sparrow will generate the diffs for changes that would occur if the charts were applied and add them in the PR comments. Sparrow supports a single chart being configured for different target environments and will generate the diffs against each environement. You may then command Sparrow to apply the changes for all or a specified set of charts and environments via PR comments.
+When a PR is opened to a charts Repo tracked by Sparrow, Sparrow will generate the diffs for changes that would occur if the modified charts were applied and add them in the PR comments. Sparrow supports a single chart being configured for different target environments and will generate the diffs against each environement. You may then command Sparrow to apply the changes for all or a specified set of charts and environments via PR comments.
 
 ### Why should you use it?
 * Make Helm Chart changes visible to your whole team.
@@ -28,7 +28,7 @@ When an PR is opened to a charts Repo tracked by Sparrow, Sparrow will generate 
 
 ### Creating a Sparrowfile
 
-In order to use sparrow you must define a `sparrowfile.yaml` at the root of you project. A SparrowFile provides Sparrow with the configruations for authenticating to clusters, and generating chart diffs for different environments. In addition to the sparrowfile you may optionally add a `namespace` key and `releaseName` key to the `Charts.yaml` for all charts in your repo that specifies desired namespace and Helm release name for your chart. If not specified the Chart name will be used as the rleease name and the `default` namespace will be used for releases
+In order to use sparrow you must define a `sparrowfile.yaml` at the root of you project. A SparrowFile provides Sparrow with the configruations for authenticating to clusters, and generating chart diffs for different environments. In addition to the sparrowfile you may optionally add a `namespace` key and `releaseName` key to the `Charts.yaml` for all charts in your repo that specifies desired namespace and Helm release name for your chart. If not specified the Chart name will be used as the release name and the `default` namespace will be used for releases
 
 Here is an example Sparrowfile:
 ```yaml
@@ -85,7 +85,7 @@ The following table provides the currently supported Sparrowfile configurations
 
 
 ### Structuring Your Charts
-Sparrow is mildly opionated on the strcuturing of your charts repo. The following layout is a suggestion for those getting started however the tool is flexible if your project structure is different:
+Sparrow is mildly opionated on the structuring of your charts repo. The following layout is a suggestion for those getting started however the tool is flexible if your project structure is different:
 ```
 ├── README.md
 └── clusters
@@ -111,7 +111,7 @@ Sparrow is mildly opionated on the strcuturing of your charts repo. The followin
 
 # Deploy and Run
 
-An official image is available through ghcr. The creation of a Helm chart is currently in progress. The application can be configured via the following environment variable.
+An official image is available through ghcr. The creation of a Helm chart is currently in progress. The application can be configured via the following environment variables.
 
 ## General
 
