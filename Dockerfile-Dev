@@ -12,7 +12,7 @@ RUN chsh -s /usr/sbin/nologin root
 ## Install gunicorn
 RUN pip install --upgrade gunicorn poetry
 
-## Set the user to non-root
+# Set the user to non-root
 # USER appuser
 
 WORKDIR /app

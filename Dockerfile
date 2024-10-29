@@ -8,6 +8,9 @@ RUN apt-get -y update; apt-get -y install curl git
 # Create a non-root-user group
 RUN groupadd -r appgroup && useradd -r -g appgroup appuser
 
+# Create the directory and assign ownership to appuser
+RUN mkdir -p /home/appuser && chown -R appuser:appgroup /home/appuser
+
 ## No shell entrypoint for root
 RUN chsh -s /usr/sbin/nologin root
 
@@ -28,4 +31,4 @@ ENV PATH="/app/bin:${PATH}"
 
 
 ## Preload gunicorn on single proc to do do bin install for release manager
-CMD ["gunicorn", "sparrow.server:app", "-w", "5", "-b", "5000", "--preload"] 
+CMD ["gunicorn", "sparrow.server:app", "-w", "5", "-b", "0.0.0.0:5000", "--preload"] 

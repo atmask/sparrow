@@ -1,6 +1,7 @@
 # Variables
 DOCKER_IMAGE := sparrow
 DOCKER_TAG := $(shell cat version.txt)
+SPARROW_DIR := $(shell pwd)
 
 .PHONY: all
 all: venv build build_docker
@@ -31,4 +32,4 @@ build_docker_dev:
 .PHONY: run_docker
 run_docker:
 	@echo "Running Docker container with code volume..."
-	docker run -it -v $(pwd):/mnt/sparrow -p 5000:5000 $(DOCKER_IMAGE)-dev /bin/bash
+	docker run -it -v $(SPARROW_DIR):/mnt/sparrow -p 5000:5000 $(DOCKER_IMAGE)-dev /bin/bash
