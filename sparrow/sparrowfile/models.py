@@ -127,14 +127,18 @@ class SparrowFile:
                 release_name = chart_data.get('name')
             return release_name
         
-    def getChartConfiguration(self, chart_path: str) -> ChartConfiguration:
+    def getChartConfiguration(self, chart_path: str, repo_path: str) -> ChartConfiguration:
         chart_config = None
         greatest_match_length = -1
+        short_chart_path = chart_path.removeprefix(repo_path)
+
         for config in self.chartConfigurations:
-            if match_length := system.path_match_length(config.path, chart_path) > greatest_match_length:
+            match_length = system.path_match_length(config.path.lstrip("/"), short_chart_path.lstrip("/"))
+            if match_length > greatest_match_length:
                 chart_config = config
                 greatest_match_length = match_length
         
+        logger.debug(f"Found chart configuration: {chart_config.path}")
         if chart_config:
             chart_config.release_name = self._getChartReleaseName(chart_path)
             chart_namespace = self._getChartNamespace(chart_path)

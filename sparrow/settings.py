@@ -36,6 +36,6 @@ HELM_VERSION = os.environ.get("SPARROW_HELM_VERSION", "3.15.0")
 ## Configure Azure
 AZURE_SUBSCRIPTION_ID = os.environ.get("AZURE_SUBSCRIPTION_ID")
 
-## Configure VCS Provider
-# GITLAB_TOKEN = os.environ.get("SPARROW_GITLAB_TOKEN")
-# GITLAB_BASE_URL = os.environ.get("GITLAB_BASE_URL", "https://gitlab.com")
+LOG_LEVEL = os.environ.get("LOG_LEVEL", "INFO")
+
+DIFF_CONTEXT = os.environ.get("SPARROW_DIFF_CONTEXT", "5")

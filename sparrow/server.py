@@ -68,7 +68,7 @@ def handle_event(event: PullRequestEvent):
                 diffs = []
                 for chart in changed_charts:
                     ## Get the cluster values mapping for this chart from the sparrowfile
-                    chart_configuration = sparrowfile.getChartConfiguration(chart)
+                    chart_configuration = sparrowfile.getChartConfiguration(chart, repo_path)
                     chart_name = chart.removeprefix(f"{repo_path}/")
 
                     ## Mkae sure the chart has a configuration in the sparrowfile
@@ -155,7 +155,7 @@ def handle_event(event: PullRequestEvent):
                     chart_env = chart.split('@')[1] if len(chart.split('@')) > 1 else None
 
                     ## Get the cluster values mapping for this chart from the sparrowfile
-                    chart_configuration = sparrowfile.getChartConfiguration(chart_path)
+                    chart_configuration = sparrowfile.getChartConfiguration(f"{repo_path}/{chart_path}", repo_path)
 
                     ## Mkae sure the chart has a configuration in the sparrowfile
                     if not chart_configuration:

@@ -126,6 +126,8 @@ An official image is available through ghcr. The creation of a Helm chart is cur
 | `SPARROW_BASIC_AUTH_PASSWORD` | The password expected for basic auth                                                 | `worraps`  |
 | `SPARROW_ROOT_PATH`           | An optional root path that will be prepended to all routes in the server             | `""`       |
 | `SPARROW_ROOT_PATH`           | An optional root path that will be prepended to all routes in the server             | `""`       |
+| `LOG_LEVEL`                   | The level to use for logging                                                         | `INFO`     |
+| `SPARROW_DIFF_CONTEXT`        | The number of context lines to wrap around a diff. Defaults to full context          | `-1`     |
 
 ## Azure
 

@@ -6,6 +6,7 @@ from sparrow.release_managers.helm import enum, plugins
 import subprocess
 from sparrow.vcs.models import MergeRequestDiff
 from typing import List
+from sparrow.settings import DIFF_CONTEXT
 
 
 class Helm:
@@ -32,7 +33,7 @@ class Helm:
             if not self._getChartDependencies(chart_path):
                 raise subprocess.CalledProcessError("Error getting chart dependencies")
 
-            cmd=['helm', 'diff', 'upgrade', release_name, chart_path, '--allow-unreleased', '--namespace', namespace]
+            cmd=['helm', 'diff', 'upgrade', release_name, chart_path, '--allow-unreleased', '--namespace', namespace, '-C', DIFF_CONTEXT]
             for values_file in values_files:
                 cmd.extend(['-f', f"{chart_path}/{values_file}"])
             

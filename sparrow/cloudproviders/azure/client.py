@@ -5,6 +5,10 @@ from sparrow.cloudproviders.decorators import handle_auth_exceptions
 
 from sparrow.settings import AZURE_SUBSCRIPTION_ID
 from sparrow.logger import logger
+import logging
+
+# Turn off noisy azure info logs
+logging.getLogger('azure').setLevel(logging.WARNING)
 
 
 class AzureClient(ICloudProvider):
@@ -23,8 +27,6 @@ class AzureClient(ICloudProvider):
     def getKubeConfig(self, resource_group_name, cluster_name) -> str:
         """Get the raw kubeconfig for the AKS cluster"""
         logger.info(f"Getting kubeconfig for cluster: {cluster_name} in rg: {resource_group_name}")
-        clusters = self._client.managed_clusters.get(resource_group_name, cluster_name)
-        logger.info(f"Clusters: {clusters}")
         # Get the kubeconfig for the AKS cluster
         kubeconfig = self._client.managed_clusters.list_cluster_admin_credentials(
             resource_group_name, cluster_name).kubeconfigs[0].value
