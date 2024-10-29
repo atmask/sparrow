@@ -38,4 +38,4 @@ AZURE_SUBSCRIPTION_ID = os.environ.get("AZURE_SUBSCRIPTION_ID")
 
 LOG_LEVEL = os.environ.get("LOG_LEVEL", "INFO")
 
-DIFF_CONTEXT = os.environ.get("SPARROW_DIFF_CONTEXT", "5")
+DIFF_CONTEXT = os.environ.get("SPARROW_DIFF_CONTEXT", "-1")
