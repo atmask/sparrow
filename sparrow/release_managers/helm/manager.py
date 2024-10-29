@@ -110,7 +110,7 @@ class Helm:
     
     def isHelmChartDirectory(self, dir_path: str) -> bool :
         # Define required files and directories for a basic Helm chart
-        required_files = ['Chart.yaml', 'chart.yaml']
+        required_files = ['Chart.yaml']
         required_dirs = ['templates']
 
         logger.debug(f"Checking if {dir_path} is a helm chart directory")
