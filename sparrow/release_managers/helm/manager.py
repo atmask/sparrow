@@ -47,8 +47,8 @@ class Helm:
             stdout_output = ''.join(stdout_output).strip()
             stderr_output = ''.join(stderr_output).strip()
             
-            logger.debug(f"Diff command output: {stdout_output}")
-            logger.debug(f"Diff command error: {stderr_output}")
+            # logger.debug(f"Diff command output: {stdout_output}")
+            # logger.debug(f"Diff command error: {stderr_output}")
 
             if not stdout_output and not stderr_output:
                 return "No changes for the chart in this environment were detected. Everything is up to date." 

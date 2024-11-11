@@ -1,5 +1,6 @@
 from contextlib import contextmanager
 from dataclasses import dataclass
+import copy
 from abc import abstractmethod
 from typing import List, Optional
 from enum import StrEnum
@@ -139,16 +140,19 @@ class SparrowFile:
                 greatest_match_length = match_length
         
         logger.debug(f"Found chart configuration: {chart_config.path}")
-        if chart_config:
-            chart_config.release_name = self._getChartReleaseName(chart_path)
+        ## Create a deep copy to avoid modifying the original
+        chart_config_copy = copy.deepcopy(chart_config)
+
+        if chart_config_copy:
+            chart_config_copy.release_name = self._getChartReleaseName(chart_path)
             chart_namespace = self._getChartNamespace(chart_path)
-            for env in chart_config.environments:
+            for env in chart_config_copy.environments:
                 if env.namespace is None:
                     env.namespace = chart_namespace
         else:
             logger.info(f"No chart configuration found for chart at {chart_path}")
     
-        return chart_config
+        return chart_config_copy
 
     
     @staticmethod
