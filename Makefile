@@ -1,6 +1,7 @@
 # Variables
 DOCKER_IMAGE := sparrow
 DOCKER_TAG := $(shell cat version.txt)
+DOCKER_SERVER := ghcr.io/atmask
 SPARROW_DIR := $(shell pwd)
 
 .PHONY: all
@@ -23,6 +24,12 @@ build:
 build_docker: build
 	@echo "Building Docker Image..."
 	docker buildx build --platform linux/amd64 -t $(DOCKER_IMAGE):$(DOCKER_TAG) .
+
+.PHONY: release
+release: build_docker
+	@echo "Tagging Image..."
+	docker tag $(DOCKER_IMAGE):$(DOCKER_TAG) $(DOCKER_SERVER)/$(DOCKER_IMAGE):$(DOCKER_TAG)
+	docker push $(DOCKER_SERVER)/$(DOCKER_IMAGE):$(DOCKER_TAG)
 
 .PHONY: build_docker_dev
 build_docker_dev:
