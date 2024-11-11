@@ -147,7 +147,7 @@ def handle_event(event: PullRequestEvent):
                     chart = user_targeted_chart.split('@')[0]
                     logger.debug(f"Checking if {chart} is in the changed charts")
                     if any(chart in changed_chart for changed_chart in changed_charts):
-                        valid_targeted_charts.append(f"{repo_path}/{user_targeted_chart}")
+                        valid_targeted_charts.append(f"{repo_path}/{user_targeted_chart}" if repo_path not in user_targeted_chart else user_targeted_chart)
 
                 logger.debug(f"Valid targeted charts: {valid_targeted_charts}")
                 for chart in valid_targeted_charts:
@@ -155,7 +155,7 @@ def handle_event(event: PullRequestEvent):
                     chart_env = chart.split('@')[1] if len(chart.split('@')) > 1 else None
 
                     ## Get the cluster values mapping for this chart from the sparrowfile
-                    chart_configuration = sparrowfile.getChartConfiguration(f"{repo_path}/{chart_path}", repo_path)
+                    chart_configuration = sparrowfile.getChartConfiguration(chart_path, repo_path)
 
                     ## Mkae sure the chart has a configuration in the sparrowfile
                     if not chart_configuration:
